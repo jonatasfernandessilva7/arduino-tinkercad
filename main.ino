@@ -5,7 +5,7 @@
 #define PinLEDRed 3
 #define PinTrigger 4
 
-int state = 0;
+int state;
 
 void setup() {
   pinMode(PinLEDYellow, OUTPUT);
@@ -24,7 +24,7 @@ void setup() {
 
 void loop() {
   if (state == 0) {
-    Serial.print("oi");
+    Serial.println("oi");
     digitalWrite(PinLEDRed, HIGH);
     digitalWrite(PinLEDYellow, LOW);
     digitalWrite(PinLEDGreen, LOW);
@@ -35,15 +35,16 @@ void loop() {
     digitalWrite(PinLEDYellow, HIGH);
     digitalWrite(PinLEDGreen, LOW);
 
-    delay(20000);
+    delay(2000);
 
     digitalWrite(PinLEDRed, LOW);
     digitalWrite(PinLEDYellow, LOW);
     digitalWrite(PinLEDGreen, HIGH);
 
-    delay(60000);
-
+    delay(6000);
+    
     state = 1;
+   
   }
   else if (state == 1) {
     Serial.println("cheguei");
@@ -54,6 +55,7 @@ void loop() {
     state = 2;
   }
   else if (state == 2) {
+    Serial.println("oi cheguei dnv");
     int swt = digitalRead(PinTrigger);
 
     if (swt == LOW) {
@@ -69,5 +71,5 @@ void loop() {
   }
 
   EEPROM.write(0, state);
-  EEPROM.commit();
 }
+
